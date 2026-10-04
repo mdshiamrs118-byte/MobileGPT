@@ -2,7 +2,6 @@ name: Build APK
 on:
   push:
   workflow_dispatch:
-  
 
 jobs:
   build:
@@ -15,6 +14,11 @@ jobs:
           java-version: "17"
           cache: gradle
       - uses: android-actions/setup-android@v3
+        with:
+          packages: |
+            platforms;android-34
+            build-tools;34.0.0
+            platform-tools
       - run: chmod +x ./gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
